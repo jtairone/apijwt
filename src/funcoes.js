@@ -25,8 +25,7 @@ exports.verificarJWT = async (req, res, next)=> {
 }
 
 //criar um usuario
-exports.Usuario = function (id, nome, senha) {
-    this.id = id;
-    this.nome = nome;
+exports.Usuario = function (user, senha) {
+    this.user = user;
     this.senha = senha
 }

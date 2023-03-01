@@ -16,7 +16,7 @@
 					"urlencoded": [
 						{
 							"key": "user",
-							"value": "tairone",
+							"value": "Tairone",
 							"description": "Usuário",
 							"type": "text"
 						},
@@ -43,7 +43,33 @@
 			"response": []
 		},
 		{
-			"name": "Clientes",
+			"name": "Logout",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://{{host}}/api/logout",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Usuarios",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true,
 				"disableCookies": false
@@ -67,21 +93,59 @@
 					]
 				},
 				"url": {
-					"raw": "http://{{host}}/api/clientes/:id",
+					"raw": "http://{{host}}/api/usuarios",
 					"protocol": "http",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
-						"clientes",
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Usuario por id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disableCookies": false
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "userId",
+							"value": "1",
+							"description": "idUsuário",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{host}}/api/usuario/:id",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"usuario",
 						":id"
 					],
 					"variable": [
 						{
 							"key": "id",
 							"value": "1",
-							"description": "caso não preencha vai retornar todos"
+							"description": "requerido"
 						}
 					]
 				}
@@ -103,32 +167,26 @@
 					"mode": "urlencoded",
 					"urlencoded": [
 						{
-							"key": "id",
-							"value": "1",
-							"description": "idUsuário",
-							"type": "text"
-						},
-						{
 							"key": "nome",
-							"value": "Tairone",
+							"value": "Teste",
 							"type": "text"
 						},
 						{
 							"key": "senha",
-							"value": "123",
+							"value": "321",
 							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "http://{{host}}/api/cadcliente",
+					"raw": "http://{{host}}/api/cadusuario",
 					"protocol": "http",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
-						"cadcliente"
+						"cadusuario"
 					]
 				}
 			},
