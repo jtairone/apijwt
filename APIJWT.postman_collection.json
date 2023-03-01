@@ -1,0 +1,165 @@
+{
+	"info": {
+		"_postman_id": "ce2d09a1-01f0-4bb8-a1a0-52a4ea299b0c",
+		"name": "APIJWT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15250227"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "user",
+							"value": "tairone",
+							"description": "Usuário",
+							"type": "text"
+						},
+						{
+							"key": "pass",
+							"value": "123",
+							"description": "Senha",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{host}}/api/login",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clientes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disableCookies": false
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "userId",
+							"value": "1",
+							"description": "idUsuário",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{host}}/api/clientes/:id",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"clientes",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1",
+							"description": "caso não preencha vai retornar todos"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar Usuário",
+			"protocolProfileBehavior": {
+				"disableCookies": false
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "1",
+							"description": "idUsuário",
+							"type": "text"
+						},
+						{
+							"key": "nome",
+							"value": "Tairone",
+							"type": "text"
+						},
+						{
+							"key": "senha",
+							"value": "123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{host}}/api/cadcliente",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"cadcliente"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "localhost:8000",
+			"type": "string"
+		}
+	]
+}
