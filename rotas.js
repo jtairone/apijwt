@@ -12,11 +12,14 @@ router.get('/', (req, res)=>{
 //rota login verificar se o usuario existe cria o token e retornar cookie do token
 router.post('/api/login', async (req, res)=>{
     try{    
-        const usuario = await DadosUsuario.findOne({where: {user: req.body.user, senha: req.body.pass}})
-        if(usuario) {     
-        const token = jwt.sign({userId: 1}, process.env.SECRET, {expiresIn: process.env.EXPIRESIN})
+        //busco o usuario com este nome de user
+        const usuario = await DadosUsuario.findOne({where: {user: req.body.user}})
+        //uso a função validar o user passando senha veem na requisiçãom salt e senha salvos no BD se retornar true
+        // e por que a senha e identica a salva criptogravada
+        if(funcoes.validarSenhaLogin(req.body.pass, usuario.salt, usuario.senha)) {     
+            const token = jwt.sign({userId: 1}, process.env.SECRET, {expiresIn: process.env.EXPIRESIN})
             res.cookie('accessToken', token, {httpOnly:true})
-           return res.json({accessToken:token})
+            return res.json({accessToken:token})
         }
         res.status(401).json({status:'Não Autorizado!'})
     }catch(erro){
@@ -25,6 +28,7 @@ router.post('/api/login', async (req, res)=>{
 })
 //rota fazer logout retornar pra apagar cookie do token
 router.get('/api/logout', funcoes.verificarJWT, (req, res) => {
+    funcoes.invalidarToken(req.cookies.accessToken)
     res.clearCookie('accessToken')
     res.json({'status':'Logout OK!'})
 })
@@ -33,7 +37,9 @@ router.post('/api/cadusuario', funcoes.verificarJWT, async (req, res)=>{
     //implementado try catch ligar excessoes de erros
     try{
         const {nome, senha} = req.body
-        const user = new funcoes.Usuario(nome, senha)
+        const salt = funcoes.gerarSalt()
+        const hash = funcoes.criptogravaSenha(senha, salt)
+        const user = new funcoes.Usuario(nome, hash.salt, hash.senha)
         const insert = await DadosUsuario.create(user)
         res.json(insert)
     }catch(err){
@@ -43,7 +49,7 @@ router.post('/api/cadusuario', funcoes.verificarJWT, async (req, res)=>{
 //buscar todos os usuarios
 router.get('/api/usuarios', funcoes.verificarJWT, funcoes.limiter, async (req, res)=>{
     try{
-        const usuarios = await DadosUsuario.findAll()
+        const usuarios = await DadosUsuario.findAll({attributes: ['id', 'user']})
         res.json(usuarios)
     }catch(err){
         res.json(err.message)
@@ -52,7 +58,7 @@ router.get('/api/usuarios', funcoes.verificarJWT, funcoes.limiter, async (req, r
 //buscar usuario por id
 router.get('/api/usuario/:id', funcoes.verificarJWT, funcoes.limiter, async (req, res)=>{
     try{
-        const usuario = await DadosUsuario.findOne({where: {id: req.params.id}})
+        const usuario = await DadosUsuario.findOne({ attributes: ['id', 'user'], where: {id: req.params.id}})
         res.json(usuario)
     }catch(err){
         res.json(err.message)

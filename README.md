@@ -6,8 +6,15 @@ API simples cadastra usuários e depois loga e desloga o mesmo validando usuario
 
 ```bash
 npm i
-node servidor.js
 ```
+## Inicializar
+```bash
+node servidor.js
+````
+Ou usando nodemon (recomendo)
+```bash
+npm start
+````
 
 ## Uso
 

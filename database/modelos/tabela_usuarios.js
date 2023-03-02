@@ -12,6 +12,10 @@ const DadosUsuario = connection.define('tabela_usuario', {
         type: Sequelize.STRING,
         allowNull: false
     },
+    salt: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
     senha: {
         type: Sequelize.STRING,
         allowNull: false
