@@ -5,7 +5,7 @@ require('dotenv').config()
 const router = express.Router()
 //implementado o Sequelize e sqlite pra trabalhar banco de dados como exemplo
 const DadosUsuario = require('./database/modelos/tabela_usuarios')
-
+//mostrar mensagem servidor esta rodando
 router.get('/', (req, res)=>{
     res.status(200).json({ message:'Rodando!'})
 })
@@ -27,6 +27,7 @@ router.post('/api/login', async (req, res)=>{
     }
 })
 //rota fazer logout retornar pra apagar cookie do token
+//e envia o token para uma função para invalidar o token
 router.get('/api/logout', funcoes.verificarJWT, (req, res) => {
     funcoes.invalidarToken(req.cookies.accessToken)
     res.clearCookie('accessToken')
