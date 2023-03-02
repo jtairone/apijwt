@@ -18,7 +18,7 @@ npm start
 
 ## Uso
 
-Usando o postam com a coleção existente dendo do projeto pode testar uso da API cadastrando um usuário e depois tentando logar o mesmo nas rotas existentes para isso dentro da collection.
+Pode-se usar o postman com a coleção existente dentro do projeto para testar uso da API cadastrando um usuário e depois podendo logar e deslogar e consulta os dados nas rotas existentes para isso dentro da collection.
 
 ## Tecnologia Utilizada no projeto
 

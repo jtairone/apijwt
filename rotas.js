@@ -64,5 +64,35 @@ router.get('/api/usuario/:id', funcoes.verificarJWT, funcoes.limiter, async (req
         res.json(err.message)
     }
 })
+//Atualizar usuario por id
+router.patch('/api/usuario/:id', funcoes.verificarJWT, funcoes.limiter, async (req, res) => {
+    try{
+        //const id = req.params.id
+        const usuario = await DadosUsuario.findOne({attributes: ['id', 'user'], where: {id: req.params.id}})
+        if(!usuario){
+            return res.json({error:'Não existe usuario com este Id'})
+        }
+        let update = await DadosUsuario.update({
+                user: req.body.user
+                }, { where: {id: usuario.id}})
+        res.json({status: `Usuário: ${usuario.id} - ${usuario.user} atualizado nome para ${req.body.user}`})
+    }catch(err){
+        res.json(err.message)
+    }
+})
+//deletar um usuario
+router.delete('/api/usuario/:id', funcoes.verificarJWT, funcoes.limiter, async (req, res) => {
+    try{
+        const usuario = await DadosUsuario.findOne({attributes: ['id', 'user'], where: {id: req.params.id}})
+        if(!usuario){
+            return res.json({error:'Não existe usuario com este Id'})
+        }
+        await DadosUsuario.destroy( { where: {id: usuario.id}} )
+        console.log(destroy)
+        res.json({status: `usuário: ${usuario.id} - ${usuario.user} deletado com sucesso!`})
+    }catch(err){
+        res.json(err.message)
+    }
+})
 
 module.exports = router

@@ -22,7 +22,7 @@
 						},
 						{
 							"key": "pass",
-							"value": "123",
+							"value": "321",
 							"description": "Senha",
 							"type": "text"
 						}
@@ -153,6 +153,86 @@
 			"response": []
 		},
 		{
+			"name": "Deletar Usuario por id",
+			"protocolProfileBehavior": {
+				"disableCookies": false
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://{{host}}/api/usuario/:id",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"usuario",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Alterar usuaruio por id",
+			"protocolProfileBehavior": {
+				"disableCookies": false
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "user",
+							"value": "Tairone Morais",
+							"description": "campo para atualizar Usuário",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{host}}/api/usuario/:id",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"usuario",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1",
+							"description": "requerido"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Cadastrar Usuário",
 			"protocolProfileBehavior": {
 				"disableCookies": false
@@ -168,7 +248,7 @@
 					"urlencoded": [
 						{
 							"key": "nome",
-							"value": "Teste",
+							"value": "Tairone",
 							"type": "text"
 						},
 						{
